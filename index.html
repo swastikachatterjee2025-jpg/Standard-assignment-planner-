@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Smart Assignment Planner is a modern productivity dashboard for university students to plan assignments, deadlines, and progress."
+    />
+    <title>Smart Assignment Planner | Plan Smart. Study Better.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="loader" id="loader" aria-label="Loading Smart Assignment Planner">
+      <div class="loader-orbit"></div>
+      <p>Launching your study cockpit...</p>
+    </div>
+
+    <header class="topbar" id="top">
+      <a class="brand" href="#hero" aria-label="Smart Assignment Planner home">
+        <span class="brand-mark"><i class="fa-solid fa-bolt"></i></span>
+        <span>Smart Assignment Planner</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#dashboard">Dashboard</a>
+        <a href="#assignments">Assignments</a>
+        <a href="#calendar">Calendar</a>
+        <a href="#about">About</a>
+      </nav>
+      <div class="topbar-actions">
+        <button class="icon-button" id="themeToggle" type="button" aria-label="Toggle dark and light mode">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <button class="icon-button menu-toggle" id="menuToggle" type="button" aria-label="Open sidebar">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </header>
+
+    <aside class="sidebar" id="sidebar" aria-label="Student planner sidebar">
+      <div class="sidebar-header">
+        <span class="brand-mark"><i class="fa-solid fa-graduation-cap"></i></span>
+        <button class="icon-button" id="closeSidebar" type="button" aria-label="Close sidebar">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <a href="#dashboard"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+      <a href="#assignments"><i class="fa-solid fa-list-check"></i> Assignments</a>
+      <a href="#calendar"><i class="fa-solid fa-calendar-days"></i> Calendar</a>
+      <a href="#quotes"><i class="fa-solid fa-star"></i> Motivation</a>
+      <a href="#about"><i class="fa-solid fa-circle-info"></i> About</a>
+    </aside>
+    <div class="backdrop" id="backdrop"></div>
+
+    <main>
+      <section class="hero section" id="hero">
+        <div class="hero-copy reveal">
+          <p class="eyebrow"><i class="fa-solid fa-wand-magic-sparkles"></i> Student Productivity & Smart Planning</p>
+          <h1>Smart Assignment Planner</h1>
+          <p class="tagline"><span id="typedTagline">Plan Smart. Study Better.</span></p>
+          <p class="hero-text">
+            Track every assignment, sort deadlines by urgency, see your monthly workload, and stay ahead with a
+            dashboard built for university momentum.
+          </p>
+          <div class="hero-actions">
+            <a class="glow-button" href="#assignments"><i class="fa-solid fa-plus"></i> Get Started</a>
+            <a class="ghost-button" href="#dashboard"><i class="fa-solid fa-chart-pie"></i> View Dashboard</a>
+          </div>
+        </div>
+        <div class="hero-visual reveal">
+          <img
+            src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=82"
+            alt="Student laptop productivity workspace"
+          />
+        </div>
+      </section>
+
+      <section class="feature-strip section" aria-label="Planner highlights">
+        <article class="feature-card reveal">
+          <i class="fa-solid fa-clock"></i>
+          <h2>Deadline Radar</h2>
+          <p>Live countdowns and urgent alerts help you spot what needs attention first.</p>
+        </article>
+        <article class="feature-card reveal">
+          <i class="fa-solid fa-filter"></i>
+          <h2>Smart Filters</h2>
+          <p>Search by title, subject, priority, status, or monthly deadline clusters.</p>
+        </article>
+        <article class="feature-card reveal">
+          <i class="fa-solid fa-trophy"></i>
+          <h2>Progress Wins</h2>
+          <p>Completion stats, productivity percentage, and confetti keep the energy high.</p>
+        </article>
+      </section>
+
+      <section class="app-shell section" id="dashboard">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Command Center</p>
+          <h2>Dashboard</h2>
+        </div>
+
+        <div class="stats-grid reveal">
+          <article class="stat-card">
+            <i class="fa-solid fa-layer-group"></i>
+            <span>Total Assignments</span>
+            <strong id="totalCount">0</strong>
+          </article>
+          <article class="stat-card">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Completed</span>
+            <strong id="completedCount">0</strong>
+          </article>
+          <article class="stat-card">
+            <i class="fa-solid fa-hourglass-half"></i>
+            <span>Pending</span>
+            <strong id="pendingCount">0</strong>
+          </article>
+          <article class="stat-card">
+            <i class="fa-solid fa-fire-flame-curved"></i>
+            <span>Productivity</span>
+            <strong id="productivityCount">0%</strong>
+          </article>
+        </div>
+
+        <div class="progress-panel reveal">
+          <div>
+            <h3>Semester Progress</h3>
+            <p id="progressMessage">Add your first assignment to begin planning.</p>
+          </div>
+          <div class="progress-track" aria-label="Assignment completion progress">
+            <span id="progressBar"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="planner-grid section" id="assignments">
+        <div class="assignment-form-panel reveal">
+          <div class="section-heading compact">
+            <p class="eyebrow">Assignment Management</p>
+            <h2 id="formTitle">Add Assignment</h2>
+          </div>
+          <form id="assignmentForm">
+            <input type="hidden" id="assignmentId" />
+            <label>
+              Subject
+              <input id="subjectInput" type="text" placeholder="Computer Science" required />
+            </label>
+            <label>
+              Assignment Title
+              <input id="titleInput" type="text" placeholder="Database normalization report" required />
+            </label>
+            <label>
+              Description
+              <textarea id="descriptionInput" rows="4" placeholder="Key notes, rubric, submission link..."></textarea>
+            </label>
+            <div class="form-row">
+              <label>
+                Due Date
+                <input id="dateInput" type="date" required />
+              </label>
+              <label>
+                Due Time
+                <input id="timeInput" type="time" required />
+              </label>
+            </div>
+            <label>
+              Priority
+              <select id="priorityInput" required>
+                <option value="high">High Priority</option>
+                <option value="medium">Medium Priority</option>
+                <option value="low">Low Priority</option>
+              </select>
+            </label>
+            <div class="form-actions">
+              <button class="glow-button" type="submit"><i class="fa-solid fa-floppy-disk"></i> Save Assignment</button>
+              <button class="ghost-button" type="button" id="resetForm"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="assignments-panel reveal">
+          <div class="panel-toolbar">
+            <div class="search-box">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input id="searchInput" type="search" placeholder="Search assignments..." />
+            </div>
+            <button class="icon-button" id="sortPriority" type="button" aria-label="Sort assignments by priority">
+              <i class="fa-solid fa-arrow-down-wide-short"></i>
+            </button>
+          </div>
+          <div class="filters">
+            <select id="subjectFilter" aria-label="Filter by subject">
+              <option value="all">All Subjects</option>
+            </select>
+            <select id="priorityFilter" aria-label="Filter by priority">
+              <option value="all">All Priorities</option>
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+            <select id="statusFilter" aria-label="Filter by completion status">
+              <option value="all">All Status</option>
+              <option value="pending">Pending</option>
+              <option value="completed">Completed</option>
+            </select>
+          </div>
+          <div class="assignment-list" id="assignmentList" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="calendar-section section" id="calendar">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Monthly Planner</p>
+          <h2>Calendar</h2>
+        </div>
+        <div class="calendar-card reveal">
+          <div class="calendar-header">
+            <button class="icon-button" id="prevMonth" type="button" aria-label="Previous month">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <h3 id="calendarTitle">Month Year</h3>
+            <button class="icon-button" id="nextMonth" type="button" aria-label="Next month">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+          <div class="weekday-grid" aria-hidden="true">
+            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+          </div>
+          <div class="calendar-grid" id="calendarGrid"></div>
+        </div>
+      </section>
+
+      <section class="quotes-section section" id="quotes">
+        <div class="quote-card reveal">
+          <i class="fa-solid fa-quote-left"></i>
+          <p id="quoteText">Small progress every day adds up to big results.</p>
+          <button class="ghost-button" id="newQuote" type="button"><i class="fa-solid fa-shuffle"></i> New Quote</button>
+        </div>
+      </section>
+
+      <section class="about-section section" id="about">
+        <div class="about-copy reveal">
+          <p class="eyebrow">About</p>
+          <h2>Built for busy university weeks.</h2>
+          <p>
+            Smart Assignment Planner keeps your coursework, priorities, and deadlines in one responsive dashboard.
+            Everything saves in your browser with localStorage, so your plan remains after refresh.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <button class="fab" id="fab" type="button" aria-label="Add a new assignment">
+      <i class="fa-solid fa-plus"></i>
+    </button>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <canvas id="confettiCanvas" aria-hidden="true"></canvas>
+
+    <footer class="footer">
+      <p>&copy; 2026 Smart Assignment Planner. Plan Smart. Study Better.</p>
+      <div class="socials" aria-label="Social links">
+        <a href="#top" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#top" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#top" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="#top" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
